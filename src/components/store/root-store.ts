@@ -1,10 +1,10 @@
 import makeInspectable from 'mobx-devtools-mst';
-// import {initNavBarStore, NavBarStore} from '@/store/nav-bar';
+import {initSubStore, SubStore} from './sub-store/subStore';
 import {Instance, types} from 'mobx-state-tree';
 import {useMemo} from 'react';
 
 const RootStore = types.model({
-//   navBar: NavBarStore,
+  subStore: SubStore,
   mainCounter: types.number,
 }).actions(self => {
   const setMainCounter = (value: number) => {
@@ -23,8 +23,8 @@ export function initializeStore(snapshot = null) {
   const _store =
     store ??
     RootStore.create({
-    //   navBar: initNavBarStore(),
-    mainCounter: 0,
+      subStore: initSubStore(),
+      mainCounter: 0,
     });
 
   if (typeof window === 'undefined') {
